@@ -1,0 +1,325 @@
+<!doctype html>
+<!--
+  Portfolio Website (single-file)
+  - Edit the content in the sections below: name, role, about text, services, projects
+  - Replace placeholder images with your own (img src or CSS background-image)
+  - Contact form is front-end only (no server). To enable email, wire it to Formspree/Netlify Functions/your backend.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JayaDharani — Portfolio</title>
+  <meta name="description" content="Portfolio of Jaya Dharani — AI & Data Science Student. Projects, services and contact." />
+   <style>
+    :root{
+      --accent: #007bff;
+      --muted: #2e3a45;
+      --bg: #b8e8ff;
+      --card: rgba(255,255,255,0.55);
+      --glass: rgba(255,255,255,0.35);
+      --radius: 14px;
+      --max-width: 1100px;
+      color-scheme: light;
+    }
+
+    *{box-sizing:border-box;}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Inter,system-ui,Arial;
+      background: linear-gradient(180deg, #d7f3ff 0%, #a5dfff 50%, #7dcbff 100%);
+      color:#003049;
+    }
+    a{color:inherit;text-decoration:none;}
+    .container{max-width:var(--max-width);margin:0 auto;padding:28px;}
+
+    /* Header */
+    header{
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.35);
+      border-radius:18px;
+      padding:14px;
+      margin-bottom:22px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .logo{
+      width:48px;height:48px;border-radius:12px;
+      background:linear-gradient(135deg,#0098ff,#4dd2ff);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#ffffff;
+    }
+    nav ul{list-style:none;display:flex;gap:12px;margin:0;padding:0;}
+    nav li a{color:#004b73;font-weight:600;}
+    nav li a:hover{color:#007bff;}
+    .cta{
+      padding:8px 12px;border-radius:10px;
+      background:linear-gradient(90deg,#009dff,#4dd2ff);
+      color:white;
+      font-weight:700;
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:28px;
+      align-items:center;
+      margin-bottom:28px;
+    }
+    .intro h1{font-size:clamp(28px,5vw,40px);margin:0 0 10px 0;}
+    .intro p{margin:0 0 18px 0;color:var(--muted);line-height:1.6;}
+    .pill{
+      display:inline-flex;gap:8px;align-items:center;
+      background:var(--glass);
+      padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:600;
+    }
+
+    .profile-card{
+      background:rgba(255,255,255,0.4);
+      padding:18px;border-radius:var(--radius);
+      box-shadow:0 6px 20px rgba(0,0,0,0.1);
+      border:1px solid rgba(255,255,255,0.45);
+    }
+    .avatar{
+      width:100%;height:320px;border-radius:12px;
+      background-image:url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80');
+      background-size:cover;background-position:center;
+    }
+    .card-body{padding-top:12px;}
+    .meta{display:flex;gap:10px;justify-content:space-between;color:var(--muted);font-size:14px;}
+
+    /* Sections */
+    section{margin-bottom:28px;}
+    h2.section-title{
+      font-size:20px;
+      margin:0 0 12px 0;
+      color:#003049;
+      font-weight:800;
+    }
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .card{
+      background:rgba(255,255,255,0.55);
+      padding:18px;border-radius:12px;
+      box-shadow:0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .project img{
+      width:100%;height:160px;object-fit:cover;border-radius:10px;
+    }
+    .project .meta{color:#0077b6;font-size:13px;}
+
+    /* Contact */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 380px;
+      gap:20px;
+    }
+    input,textarea{
+      background:rgba(255,255,255,0.4);
+      border:1px solid rgba(0,0,0,0.1);
+      padding:12px;border-radius:10px;color:#003049;
+    }
+    button.primary{
+      background:linear-gradient(90deg,#009dff,#4dd2ff);
+      padding:12px;border-radius:10px;border:0;font-weight:700;color:white;
+    }
+
+    footer{text-align:center;margin-top:40px;color:#2e5a73;}
+
+    /* Responsive */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .profile-card{order:-1;}
+      .grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:540px){
+      .grid{grid-template-columns:1fr;}
+      .contact-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">JD</div>
+          <div>
+            <div style="font-weight:800">Jaya Dharani</div>
+            <div style="font-size:13px;color:var(--muted)">AI & Data Science Student</div>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a class="cta" href="#contact">Hire Me</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="intro">
+          <div class="pill">Open to internships • Available for freelance</div>
+          <h1>Hi — I'm <span style="color:var(--accent)">Jaya</span>. I build ML solutions & data-driven apps.</h1>
+          <p>I am an AI & Data Science student building accessible tools and web apps. I work on speech therapy models, contact-management apps, and full-stack projects that make life easier.</p>
+          <div class="socials" style="margin-top:12px">
+            <a class="chip" href="#">GitHub</a>
+            <a class="chip" href="#">LinkedIn</a>
+            <a class="chip" href="#">Portfolio PDF</a>
+          </div>
+          <div style="margin-top:18px;color:var(--muted)">
+            <strong>Top skills:</strong> Python • Flask • React • FastAPI • NLP • Computer Vision
+          </div>
+        </div>
+
+        <aside class="profile-card">
+          <div class="avatar" role="img" aria-label="Profile image"></div>
+          <div class="card-body">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-weight:800">Jaya Dharani</div>
+                <div class="muted" style="font-size:13px">AIDS Student • Full-stack ML</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-weight:800;font-size:18px">Available</div>
+                <div class="muted" style="font-size:13px">Freelance & Internships</div>
+              </div>
+            </div>
+            <div class="meta" style="margin-top:12px">
+              <div>📧 purchase@techsolutions.com</div>
+              <div>📍 India</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about">
+        <h2 class="section-title">About me</h2>
+        <div class="card" style="padding:20px;display:flex;flex-direction:column;gap:12px">
+          <p class="muted">I am an enthusiastic AI & Data Science student who loves building practical projects — from AI speech therapy assistants (SpeakBee-like) to contact-management systems with voice input. I enjoy designing clean frontends and robust backends, and learning new ML techniques such as SVD, PCA, and pronunciation assessment methods.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div class="pill">Languages: Python, C++, JavaScript</div>
+            <div class="pill">Tools: Flask, FastAPI, React, NumPy, Pandas</div>
+            <div class="pill">Interests: Speech Processing, NLP, Embedded Systems</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <h2 class="section-title">Services</h2>
+        <div class="grid">
+          <div class="card">
+            <div style="display:flex;gap:12px;align-items:center">
+              <div class="service-icon">AI</div>
+              <div>
+                <div style="font-weight:800">Custom ML Models</div>
+                <div class="muted">NLP, speech analysis, classification & regression</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display:flex;gap:12px;align-items:center">
+              <div class="service-icon">Web</div>
+              <div>
+                <div style="font-weight:800">Full-stack Web Apps</div>
+                <div class="muted">Flask / FastAPI backends, React frontends, deployment</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display:flex;gap:12px;align-items:center">
+              <div class="service-icon">UX</div>
+              <div>
+                <div style="font-weight:800">Design & Prototyping</div>
+                <div class="muted">Responsive UI, accessibility, & user testing</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2 class="section-title">Selected projects</h2>
+        <div class="grid">
+          <div class="project card">
+            <img src="https://images.unsplash.com/photo-1581093588401-4e0e5b42e6f8?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=" alt="Project screenshot">
+            <div style="font-weight:800">SpeakBee — AI Speech Therapy</div>
+            <div class="meta">Python • FastAPI • Pronunciation scoring • Daily streaks</div>
+          </div>
+
+          <div class="project card">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=" alt="Project screenshot">
+            <div style="font-weight:800">Contact Manager</div>
+            <div class="meta">Flask • JSON storage • Voice recognition • Image upload</div>
+          </div>
+
+          <div class="project card">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=" alt="Project screenshot">
+            <div style="font-weight:800">TaskTrack</div>
+            <div class="meta">Task management app — planning and progress tracking</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-grid">
+          <div class="card">
+            <p style="margin-top:0" class="muted">Want to collaborate or hire me? Fill the form and I'll get back to you.</p>
+            <form onsubmit="handleSubmit(event)">
+              <input type="text" id="name" placeholder="Your name" required />
+              <input type="email" id="email" placeholder="Your email" required />
+              <input type="text" id="subject" placeholder="Subject" />
+              <textarea id="message" rows="5" placeholder="Message" required></textarea>
+              <button type="submit" class="primary">Send message</button>
+            </form>
+            <div style="margin-top:12px;color:var(--muted);font-size:13px">Or email me at <strong>purchase@techsolutions.com</strong></div>
+          </div>
+
+          <aside class="card">
+            <h3 style="margin:0 0 8px 0">Quick info</h3>
+            <div class="muted">Based in India • Open to internships & freelance</div>
+            <hr style="opacity:.06;margin:12px 0" />
+            <div style="display:flex;gap:8px;flex-direction:column">
+              <div><strong>Services</strong><div class="muted">ML prototyping, web apps, UI/UX</div></div>
+              <div><strong>Availability</strong><div class="muted">Weekdays — evenings IST</div></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Jaya Dharani — Built with ❤️ • <span class="muted">Designed for accessibility</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    function handleSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      // Front-end only: show a friendly message. Hook this up to a backend to actually send emails.
+      alert('Thanks '+name+"! Your message has been noted. (This demo form does not send emails.)");
+      e.target.reset();
+    }
+  </script>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="j4xfPIqVcNrPoALmrZSNx";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+</body>
+</html>
